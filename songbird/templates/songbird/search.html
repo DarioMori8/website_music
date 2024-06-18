@@ -1,0 +1,124 @@
+{% extends 'songbird/common_initial.html' %}
+
+{% block content %}
+<div class="container">
+    <form method="GET" action="{% url 'search' %}">
+        <input type="text" name="q" placeholder="Search..." value="{{ query }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="btn-group" role="group" aria-label="Basic example">
+        <button type="button" class="btn btn-outline-primary filter-button {% if filter_type == 'all' %}active{% endif %}" data-filter="all">All</button>
+        <button type="button" class="btn btn-outline-primary filter-button {% if filter_type == 'song' %}active{% endif %}" data-filter="song">Song</button>
+        <button type="button" class="btn btn-outline-primary filter-button {% if filter_type == 'playlist' %}active{% endif %}" data-filter="playlist">Playlist</button>
+        <button type="button" class="btn btn-outline-primary filter-button {% if filter_type == 'user' %}active{% endif %}" data-filter="user">User</button>
+        <button type="button" class="btn btn-outline-primary filter-button {% if filter_type == 'artist' %}active{% endif %}" data-filter="artist">Artist</button>
+        <button type="button" class="btn btn-outline-primary filter-button {% if filter_type == 'genre' %}active{% endif %}" data-filter="genre">Genre</button>
+    </div>
+
+    <div id="search-results">
+        {% if filter_type == 'all' or filter_type == 'song' %}
+            <h3>Songs</h3>
+            <ul>
+                {% for song in songs %}
+                    <li id="song-details-{{ song.id }}" class="song-container d-flex justify-content-between align-items-center py-2">
+                        <div class="song-details">
+                            <h5 class="m-0">{{ song.title }}</h3>
+                            <p class="m-0 text-muted">{{ song.artist }}</p>
+                        </div>
+                        <div class="song-progress">
+                            <input type="range" min="0" max="100" value="0" step="1" class="progress-bar" id="progress-bar-{{ song.id }}">
+                            <span class="current-time" id="current-time-{{ song.id }}">0:00</span>
+                        </div>
+                        <div class="song-actions">
+                            <input type="hidden" id="increment-url-{{ song.id }}" value="{% url 'increment_play_count_song' song.id %}">
+                            <button class="btn btn-primary btn-sm play-button" id="play-button-{{ song.id }}" data-audio="{{ song.get_audio_url }}" data-song-id="{{ song.id }}">Play</button>
+                            <button class="btn btn-secondary btn-sm stop-button" id="stop-button-{{ song.id }}" data-audio="{{ song.get_audio_url }}">Stop</button>
+                            {% if request.user.is_authenticated %}
+                                <button class="btn btn-sm favorite-button" data-song-id="{{ song.id }}">
+                                    {% if song in user_profile.favorite_songs.all %}
+                                        <i class="fa fa-heart favorite-heart"></i> 
+                                    {% else %}
+                                        <i class="fa fa-heart"></i> 
+                                    {% endif %}
+                                </button>
+                                <div class="dropdown">
+                                    <button class="btn btn-sm add-to-playlist-button dropdown-toggle" type="button" id="dropdownMenuButton" data-song-id="{{ song.id }}">
+                                        <i class="fa fa-plus"></i> 
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <!-- Playlists will be populated dynamically via JavaScript -->
+                                    </div>
+                                </div>
+                            {% else %}
+                                <button class="btn btn-sm favorite-button login-prompt" data-song-id="{{ song.id }}">
+                                    <i class="fa fa-heart"></i> 
+                                </button>
+                                <button class="btn btn-sm add-to-playlist-button login-prompt" data-song-id="{{ song.id }}">
+                                    <i class="fa fa-plus"></i> 
+                                </button>
+                        {% endif %}
+                    </li>
+                {% empty %}
+                    <li>No songs found.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if filter_type == 'all' or filter_type == 'playlist' %}
+            <h3>Playlists</h3>
+            <ul>
+                {% for playlist in playlists %}
+                <li><a href="{% url 'playlist_detail' playlist.id %}" style="color: white; text-decoration: none;">{{ playlist.name }} (Genre: {{ playlist.genre }})</a></li>
+                {% empty %}
+                    <li>No playlists found.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if filter_type == 'all' or filter_type == 'user' %}
+            <h3>Users</h3>
+            <ul>
+                {% for user in users %}
+                    {% if request.user.is_authenticated %}
+                        <li><a href="{% url 'follow_profile' user.id %}" style="color: white; text-decoration: none;">{{ user.username }}</a></li>
+                    {% else %}
+                        <li><a href="#" class="login-prompt" data-username="{{ user.username }}" style="color: white; text-decoration: none;">{{ user.username }}</a></li>
+                    {% endif %}
+                {% empty %}
+                    <li>No users found.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if filter_type == 'all' or filter_type == 'artist' %}
+            <h3>Artists</h3>
+            <ul>
+                {% for artist in artists %}
+                    <li><a href="{% url 'artist_songs' artist.artist %}" style="color: white; text-decoration: none;">{{ artist.artist }}</a></li>
+                {% empty %}
+                    <li>No artists found.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+
+        {% if filter_type == 'all' or filter_type == 'genre' %}
+            <h3>Genres</h3>
+            <ul>
+                {% for genre in genres %}
+                   <li><a href="{% url 'genre_detail' genre.genre %}" style="color: white; text-decoration: none;">{{ genre.genre }}</a></li>
+                {% empty %}
+                    <li>No genres found.</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+{% load static %}
+<script src="{% static 'js/search.js' %}"></script>
+<script src="{% static 'js/add_playlist_and_favorites.js' %}"></script>
+
+
+{% endblock %}

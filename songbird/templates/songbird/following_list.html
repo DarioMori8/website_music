@@ -1,0 +1,15 @@
+{% extends 'songbird/common_simple.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>Following</h1>
+    <ul>
+        {% for profile in following %}
+            <li>
+                <a href="{% url 'follow_profile' profile.user.id %}" style =" color: white; text-decoration: none; font-size: 2em">{{ profile.user.username }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

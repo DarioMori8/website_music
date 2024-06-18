@@ -1,0 +1,22 @@
+
+
+{% extends 'songbird/common_simple.html' %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1 class="mb-4">Elenco Canzoni</h1>
+        <div class="songs">
+            {% for song in songs %}
+                <div class="song-container">
+                    <div class="song-details">
+                        <h3>{{ song.title }}</h3>
+                        <p>{{ song.artist }}</p>
+                    </div>
+                    <button class="play-button" id="play-button-{{ song.id }}" data-audio="{{ song.get_audio_url }}">Play</button>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
+

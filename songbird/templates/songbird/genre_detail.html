@@ -1,0 +1,72 @@
+{% extends 'songbird/common_initial.html' %}
+
+{% block content %}
+<div class="container mt-5">
+    <h2>{{ genre.name }} Songs</h2>
+    <ul class="list-unstyled">
+        {% for song in songs %}
+            <li class="song-container d-flex justify-content-between align-items-center py-2">
+                <div class="song-details">
+                    <h3 class="m-0">{{ song.title }}</h3>
+                    <p class="m-0 text-muted">{{ song.artist }}</p>
+                </div>
+                <div class="song-progress">
+                    <input type="range" min="0" max="100" value="0" step="1" class="progress-bar" id="progress-bar-{{ song.id }}">
+                    <span class="current-time" id="current-time-{{ song.id }}">0:00</span>
+                </div>
+                <div class="song-actions">
+                    {% if song.id %}
+                        <input type="hidden" id="increment-url-{{ song.id }}" value="{% url 'increment_play_count_song' song.id %}">
+                        <button class="btn btn-primary btn-sm play-button" id="play-button-{{ song.id }}" data-audio="{{ song.get_audio_url }}" data-song-id="{{ song.id }}">Play</button>
+                        <button class="btn btn-secondary btn-sm stop-button" id="stop-button-{{ song.id }}" data-audio="{{ song.get_audio_url }}">Stop</button>
+                        {% if request.user.is_authenticated %}
+                            <button class="btn btn-sm favorite-button" data-song-id="{{ song.id }}">
+                                {% if song in user_profile.favorite_songs.all %}
+                                    <i class="fa fa-heart favorite-heart"></i> 
+                                {% else %}
+                                    <i class="fa fa-heart"></i> 
+                                {% endif %}
+                            </button>
+                            <div class="dropdown">
+                                <button class="btn btn-sm add-to-playlist-button dropdown-toggle" type="button" id="dropdownMenuButton" data-song-id="{{ song.id }}">
+                                    <i class="fa fa-plus"></i> 
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <!-- Playlists will be populated dynamically via JavaScript -->
+                                </div>
+                            </div>
+                        {% else %}
+                            <button class="btn btn-sm favorite-button " data-song-id="{{ song.id }}">
+                                <i class="fa fa-heart"></i> 
+                            </button>
+                            <button class="btn btn-sm add-to-playlist-button " data-song-id="{{ song.id }}">
+                                <i class="fa fa-plus"></i> 
+                            </button>
+                        {% endif %}
+                    {% else %}
+                        <p>Invalid song ID</p>
+                    {% endif %}
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <h2>{{ genre.name }} Playlists</h2>
+    <div class="row">
+        {% for playlist in playlists %}
+            <div class="col-md-4">
+                <div class="card mb-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ playlist.name }}</h5>
+                        <p class="card-text">Genres: {{ playlist.genre }}</p>
+                        <a href="{% url 'playlist_detail' playlist.id %}" class="btn btn-primary">View Playlist</a>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% load static %}
+<script src="{% static 'js/add_playlist_and_favorites.js' %}"></script>
+{% endblock %}

@@ -1,0 +1,106 @@
+{% extends 'songbird/common_simple.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container text-center">
+    <!-- Navbar -->
+
+    <!-- Username -->
+    <div class="row align-items-center">
+        <div class="col-12">
+            <h1>{{ user_profile.user.username }}'s Profile</h1>
+        </div>
+    </div>
+
+    <!-- Profile picture -->
+    <div class="row">
+        <div class="col-12">
+            {% if user_profile.profile_picture %}
+                <img class="img_profile rounded-circle" src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" style="height: 300px; width: auto;">
+            {% else %}
+                <p>No profile picture available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Bio and email -->
+    <div class="row">
+        <div class="col-12">
+            <p>Bio: {{ user_profile.bio }}</p>
+            <p>Email: {{ user_profile.user.email }}</p>
+        </div>
+    </div>
+
+    <!-- Follow/Unfollow button -->
+    <div class="row">
+        <div class="col-12">
+            {% if user_profile.user != request.user %}
+                {% if user_profile in request.user.userprofile.following.all %}
+                    <form action="{% url 'unfollow_user' user_profile.user.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Unfollow</button>
+                    </form>
+                {% else %}
+                    <form action="{% url 'follow_user' user_profile.user.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-primary">Follow</button>
+                    </form>
+                {% endif %}
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Public playlists carousel -->
+    <div class="row">
+        <div class="col-12">
+            <h2>Public Playlists</h2>
+            {% if playlists %}
+            <div id="playlistCarousel" class="carousel slide"  data-bs-touch="true">
+                <div class="carousel-inner">
+                    {% for group in playlist_groups %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <div class="row justify-content-center">
+                                {% for playlist in group %}
+                                    <div class="col-2">
+                                        <div class="card playlist-card" data-playlist-id="{{ playlist.id }}">
+                                            <a href="{% url 'playlist_detail' playlist.id %}" class="stretched-link"></a>
+                                            <div class="card-body sand-bg d-flex flex-column justify-content-center align-items-center">
+                                                <h5 class="card-title text-center">{{ playlist.name }}</h5>
+                                            </div>
+                                            <div class="card-footer text-center black-bg">
+                                                <p class="card-text">Created by: {{ playlist.user.username }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <!-- Aggiungi controlli manuali per il carosello -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#playlistCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#playlistCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            {% else %}
+                <p>No public playlists available.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<style>
+    .playlist-card {
+        width: 150px;
+        height: 150px;
+    }
+    .carousel-item .card {
+        display: inline-block;
+    }
+</style>
+{% endblock %}

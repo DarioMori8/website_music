@@ -1,0 +1,54 @@
+{% extends 'songbird/common_simple.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <!-- Navbar -->
+
+    <div class="row align-items-center">
+        <!-- Div per lo username -->
+        <div class="col-sm-6 offset-sm-3 text-center">
+            <h1>{{ user.username }}'s Profile</h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <!-- Div per i bottoni -->
+        <div class="col-sm-3 align-items-center d-flex justify-content-center" id="left-buttons">
+            <div class="d-flex flex-column">
+                <a href="{% url 'user_playlists' %}" class="btn btn-info btn-lg btn-block mb-2">My Playlist</a>
+                <a href="{% url 'favorite_songs' %}" class="btn btn-info btn-lg btn-block mb-2">Songs You Like</a>
+                <a href="{% url 'following_list' %}" class="btn btn-info btn-lg btn-block mb-2">Follow</a>
+            </div>
+        </div>
+
+        <!-- Div per l'immagine di profilo -->
+        <div class="col-sm-6 text-center">
+            {% if user_profile.profile_picture %}
+                <img class="img_profile" src="{{ user_profile.profile_picture.url }}" alt="Profile Picture" style="height: 300px; width: auto;">
+            {% else %}
+                <p>No profile picture available.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- Div per la bio ed email -->
+    <div class="row">
+        <div class="col-sm-6 offset-sm-3 text-center">
+            <p>Bio: {{ user_profile.bio }}</p>
+            <p>Email: {{ user.email }}</p>
+        </div>
+    </div>
+
+    <!-- Div per il logout e Modify profile -->
+    <div class="row">
+        <div class="col-sm-12 d-flex justify-content-end align-items-center">
+            <a href="{% url 'edit_profile' %}" class="modify-profile-link text-white text-decoration-none mr-4">Modify profile</a>
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger">Logout</button>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

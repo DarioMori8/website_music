@@ -1,0 +1,28 @@
+{% extends 'songbird/common_initial.html' %}
+{% block content %}
+<div class="container">
+    <h1>My Playlists</h1>
+    <ul class="list-group">
+        {% for playlist in playlists %}
+            <li class="list-group-item d-flex justify-content-between align-items-center" style="background-color: beige;">
+                <a href="{% url 'playlist_detail' playlist.id %}" class="playlist-link" style="color: black; text-decoration: none;">{{ playlist.name }}</a>
+                <div class="d-flex align-items-center">
+                    <form action="{% url 'toggle_playlist_public' playlist.id %}" method="post" class="mr-3 mb-0">
+                        {% csrf_token %}
+                        <input type="checkbox" class="toggle-public" data-id="{{ playlist.id }}" {% if playlist.is_public %}checked{% endif %}>
+                    </form>
+                    <form action="{% url 'delete_playlist' playlist.id %}" method="post" class="mb-0">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                    </form>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'create_playlist' %}" class="btn btn-primary mt-3">Create New Playlist</a>
+</div>
+
+
+{% load static %}
+<script src="{% static 'js/is_public.js' %}"></script>
+{% endblock %}
