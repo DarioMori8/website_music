@@ -27,4 +27,4 @@ RUN mkdir -p /app/website_music/static/
 RUN python manage.py collectstatic --noinput
 
 # Comando di avvio dell'applicazione con Gunicorn
-CMD gunicorn mysite.wsgi:application --bind 0.0.0.0:$PORT
+CMD gunicorn website_music.wsgi:application --bind 0.0.0.0:$PORT

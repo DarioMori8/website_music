@@ -87,13 +87,6 @@ class UserProfile(models.Model):
     def __str__(self):
         return self.user.username
 
-    
-class Recommendation(models.Model):
-    user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    song = models.ForeignKey(Song, on_delete=models.CASCADE)
-    recommended_at = models.DateTimeField(auto_now_add=True)
 
-    def __str__(self):
-        return f"{self.user.username} - {self.song.title}"
 
 
