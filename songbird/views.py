@@ -64,12 +64,6 @@ def profile(request):
     return render(request, 'songbird/profile.html', context)
 
 
-def song_list(request):
-   
-    songs = Song.objects.all()
-    return render(request, 'songbird/song_list.html', {'songs': songs})
-
-
 
 def register_view(request):
     if request.method == 'POST':
