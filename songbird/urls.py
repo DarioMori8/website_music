@@ -10,7 +10,6 @@ urlpatterns=[
     path('logout/', views.logout_view, name='logout'),
     path('register/', views.register_view, name="register"), 
     path('profile/', views.profile, name ='profile' ),
-    path('song/', views.song_list, name ='song'),
     path('playlist/<int:playlist_id>/', views.playlist_detail, name='playlist_detail'),
     path('search/', views.search, name='search'),
     path('artist/<str:artist_name>/', views.artist_songs, name='artist_songs'),
