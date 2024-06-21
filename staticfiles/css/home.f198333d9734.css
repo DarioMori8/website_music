@@ -1,0 +1,66 @@
+/* Stile per il body */
+.home {
+    background-color: black; /* Sfondo nero */
+    color: white; /* Testo bianco */
+    font-family: Arial, sans-serif; /* Tipo di carattere */
+    margin: 0; /* Rimuovi i margini */
+    padding: 0; /* Rimuovi il padding */
+ 
+}
+
+/* Stile per la navbar */
+.navbar {
+    background-color: #000000; /* Colore di sfondo nero */
+    padding: 15px 20px; /* Spaziatura interna */
+    display: flex; /* Usa il layout flessibile */
+    justify-content: space-between; /* Allinea gli elementi ai due lati */
+}
+
+/* Stile per il logo */
+.logo {
+    font-size: 24px; /* Dimensione del font */
+}
+
+/* Stile per l'icona del profilo */
+.profile-icon {
+    font-size: 24px; /* Dimensione del font */
+    color: white; /* Icona bianca */
+}
+
+/* Stile per il container */
+.container {
+    width: 100%;
+    height: auto;
+}
+.carousel-inner{
+    overflow-x: scroll;
+}
+
+/* Stile per la card delle playlist */
+.playlist-card {
+    width: 100%; /* Le card occupano tutta la larghezza della colonna */
+    height: 400px; /* Aumenta l'altezza delle card */
+    margin: 0 auto; /* Centra le card nel carosello */
+}
+
+/* Stile per il body della card */
+.sand-bg {
+    background-color: #f4a460; /* Colore sabbia */
+    flex-grow: 1; /* Permette alla card-body di occupare tutto lo spazio disponibile */
+}
+
+/* Stile per il footer della card */
+.black-bg {
+    background-color: #000000; /* Sfondo nero */
+    color: white; /* Testo bianco */
+}
+
+.carousel-item .col-2 {
+    padding: 5px;
+    max-width: 18%; /* Ridimensiona la colonna per contenere 5 card */
+    flex: 0 0 18%; /* Assicura che 5 card rimangano visibili */
+}
+
+.favorite-heart {
+    color: red;
+}
