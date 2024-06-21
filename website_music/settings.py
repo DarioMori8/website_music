@@ -133,7 +133,6 @@ CACHES = {
 LOGIN_URL = '/accounts/login/'
 
 CSRF_TRUSTED_ORIGINS = [
-    '*',
-    'websitemusic-production.up.railway.app',
-    'https://websitemusic-production.up.railway.app/',
+    'https://websitemusic-production.up.railway.app',
 ]
+
