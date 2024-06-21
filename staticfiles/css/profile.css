@@ -1,15 +1,14 @@
 .profile {
-    background-color: black; /* Sfondo nero */
-    color: white; /* Testo bianco */
-    font-family: Arial, sans-serif; /* Tipo di carattere */
-    margin: 0; /* Rimuovi i margini */
-    padding: 0; /* Rimuovi il padding */
+    background-color: black;
+    color: white; 
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0; 
 }
 .img_profile{
     width:30px;
     height:auto;
 }
-/* styles.css */
 #left-buttons {
     display: flex;
     flex-direction: column;

@@ -5,6 +5,5 @@ from django.dispatch import receiver
 
 @receiver(post_migrate)
 def clear_sessions(sender, **kwargs):
-    # Elimina tutte le sessioni
     Session.objects.all().delete()
 

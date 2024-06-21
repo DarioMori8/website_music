@@ -1,17 +1,15 @@
-/* Stile per il body */
 .login {
-    background-color: black; /* Sfondo nero */
-    color: white; /* Testo bianco */
-    font-family: Arial, sans-serif; /* Tipo di carattere */
-    margin: 0; /* Rimuovi i margini */
-    padding: 0; /* Rimuovi il padding */
-    display: flex; /* Utilizzo di Flexbox per centrare il contenuto */
-    justify-content: center; /* Centra orizzontalmente */
-    align-items: center; /* Centra verticalmente */
-    height: 100vh; /* Altezza della finestra */
+    background-color: black; 
+    color: white; 
+    font-family: Arial, sans-serif; 
+    margin: 0;
+    padding: 0; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh; 
 }
 
-/* Stile per il contenitore della login */
 .login-container {
     width: 100%;
     display: flex;
@@ -19,29 +17,27 @@
     align-items: center;
 }
 
-/* Stile per il riquadro della login */
 .login-box {
-    background-color: #333; /* Colore di sfondo del riquadro */
-    padding: 20px; /* Spaziatura interna */
-    border-radius: 10px; /* Angoli arrotondati */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Ombreggiatura */
-    width: 300px; /* Larghezza del riquadro */
-    text-align: center; /* Allinea il testo al centro */
+    background-color: #333; 
+    padding: 20px;
+    border-radius: 10px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); 
+    width: 300px; 
+    text-align: center; 
 }
 
 .login-box h2 {
-    margin-bottom: 20px; /* Spaziatura sotto il titolo */
+    margin-bottom: 20px; 
 }
 
-/* Stile per il link di registrazione */
 .register-link {
     display: block;
-    margin-top: 10px; /* Spaziatura sopra il link */
-    font-size: 0.9em; /* Dimensione del font ridotta */
-    color: #bbb; /* Colore del testo */
-    text-align: right; /* Allinea il testo a destra */
+    margin-top: 10px; 
+    font-size: 0.9em; 
+    color: #bbb; 
+    text-align: right; 
 }
 
 .register-link:hover {
-    color: white; /* Cambia il colore al passaggio del mouse */
+    color: white; 
 }

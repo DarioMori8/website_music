@@ -15,7 +15,6 @@ $(document).ready(function(){
         $('#player-song-artist').text(songArtist);
         $('#player-bar').show();
 
-        // Update play button data
         $('#player-play-button').data('audio', audioUrl).data('song-id', songId);
         $('#player-stop-button').data('audio', audioUrl);
     });

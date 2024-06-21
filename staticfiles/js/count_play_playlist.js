@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const csrfTokenElement = document.querySelector('[name=csrfmiddlewaretoken]');
         const csrfToken = csrfTokenElement.value;
 
-        console.log('Sending played songs count:', playedSongsCount); // Log the value before sending
+        console.log('Sending played songs count:', playedSongsCount);
         
         fetch(incrementPlaylistUrl, {
             method: 'POST',
@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return response.json();
         }).then(data => {
             console.log('Playlist play count incremented:', data);
-            playedSongsCount = 0; // Reset the counter after incrementing the playlist play count
+            playedSongsCount = 0; 
         }).catch((error) => {
             console.error('Error:', error);
         });
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.addEventListener('playCountIncremented', function () {
         playedSongsCount++;
-        console.log('Played songs count:', playedSongsCount); // Log the incremented value
+        console.log('Played songs count:', playedSongsCount); 
         if (playedSongsCount >= 3) {
             incrementPlaylistPlayCount();
         }

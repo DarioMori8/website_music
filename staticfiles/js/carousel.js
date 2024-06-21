@@ -1,11 +1,10 @@
 
 var carousel = document.querySelector('#playlistCarousel');
 var carouselInstance = new bootstrap.Carousel(carousel, {
-    interval: false, // Disabilita lo scorrimento automatico
-    wrap: false, // Disabilita il ciclo continuo
+    interval: false, 
+    wrap: false, 
 });
 
-// Rendi le slide scorrevoli con il touch
 carousel.addEventListener('touchstart', handleTouchStart, false);
 carousel.addEventListener('touchmove', handleTouchMove, false);
 
@@ -28,17 +27,17 @@ function handleTouchMove(evt) {
     var xDiff = xDown - xUp;
     var yDiff = yDown - yUp;
 
-    if (Math.abs(xDiff) > Math.abs(yDiff)) { // Movimento orizzontale maggiore di quello verticale
-        if (Math.abs(xDiff) > 10) { // Se il movimento orizzontale è significativo
+    if (Math.abs(xDiff) > Math.abs(yDiff)) { 
+        if (Math.abs(xDiff) > 10) { 
             if (xDiff > 0) {
-                carouselInstance.next(); // Scorri a destra
+                carouselInstance.next(); 
             } else {
-                carouselInstance.prev(); // Scorri a sinistra
+                carouselInstance.prev(); 
             }
         }
     }
 
-    xDown = null; // Resetta le variabili per il prossimo touch
+    xDown = null; 
     yDown = null;
 };
 

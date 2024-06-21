@@ -3,8 +3,6 @@ from typing import Counter
 import warnings
 from django.shortcuts import render,  redirect, get_object_or_404
 from .models import *
-#from .forms import PlaylistForm
-#from django.db.models import Q
 from django.contrib.auth import  authenticate, login, logout
 from .forms import UserRegistrationForm
 from .forms import UserLoginForm
@@ -19,14 +17,6 @@ from django.views.decorators.http import require_POST,require_GET
 from django.db.models import Q
 
 
-
-
-
-#import uuid
-#from urllib.parse import quote
-
-
-# Create your views here.
 
     
 
@@ -70,9 +60,8 @@ def register_view(request):
         form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            # Log the user in
             login(request, user)
-            return redirect('profile')  # Reindirizza alla pagina del profilo dopo la registrazione
+            return redirect('profile')
     else:
         form = UserRegistrationForm()
     return render(request, 'songbird/register.html', {'form': form})
@@ -87,7 +76,7 @@ def login_view(request):
             user = authenticate(username=username, password=password)
             if user is not None:
                 login(request, user)
-                return redirect('/')  # Sostituisci 'home' con il nome della tua vista di home
+                return redirect('/')  
             else:
                 messages.error(request, 'Invalid username or password')
     else:
@@ -96,7 +85,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')  # Sostituisci 'home' con il nome della tua vista di home
+    return redirect('home')  
 
 
 @login_required
@@ -135,9 +124,7 @@ def delete_playlist(request, playlist_id):
 
 @login_required
 def favorite_songs(request):
-    # Ottieni il profilo dell'utente corrente
     user_profile = UserProfile.objects.get(user=request.user)
-    # Ottieni tutte le canzoni preferite dell'utente corrente
     favorite_songs = user_profile.favorite_songs.all()
     context = {
         'favorite_songs': favorite_songs,
@@ -179,9 +166,9 @@ def create_playlist(request):
             playlist = form.save(commit=False)
             playlist.user = request.user
             playlist.save()
-            playlist.update_genre()  # Aggiorna il genere
-            form.save_m2m()  # Save the many-to-many data for the form
-            return redirect('profile')  # Redirect to profile or another page
+            playlist.update_genre()  
+            form.save_m2m() 
+            return redirect('profile') 
     else:
         form = PlaylistForm()
     return render(request, 'songbird/create_playlist.html', {'form': form})
@@ -211,7 +198,7 @@ def add_to_playlist(request, song_id, playlist_id):
         song = get_object_or_404(Song, id=song_id)
         if song not in playlist.songs.all():
             playlist.add_song(song)
-            playlist.update_genre()  # Aggiorna il genere
+            playlist.update_genre() 
             return JsonResponse({'message': 'Song added to playlist successfully!'})
         else:
             return JsonResponse({'message': 'Song is already in the playlist.'})
@@ -222,7 +209,7 @@ def remove_song_from_playlist(request, playlist_id, song_id):
     song = get_object_or_404(Song, id=song_id)
     if song in playlist.songs.all():
         playlist.remove_song(song)
-        playlist.update_genre()  # Aggiorna il genere
+        playlist.update_genre()  
     return redirect('playlist_detail', playlist_id=playlist.id)
 
 @login_required
@@ -232,7 +219,7 @@ def edit_profile(request):
         form = UserProfileForm(request.POST, request.FILES, instance=user_profile)
         if form.is_valid():
             form.save()
-            return redirect('profile')  # Reindirizza alla pagina del profilo utente
+            return redirect('profile') 
     else:
         form = UserProfileForm(instance=user_profile)
     return render(request, 'songbird/edit_profile.html', {'form': form})
@@ -241,7 +228,7 @@ def edit_profile(request):
 
 
 @require_POST
-@csrf_exempt  # Disable CSRF protection for this view
+@csrf_exempt  
 def toggle_playlist_public(request, playlist_id):
     playlist = get_object_or_404(Playlist, id=playlist_id)
     if request.user == playlist.user:
@@ -313,10 +300,8 @@ def search(request):
             Q(artist__icontains=query) |
             Q(genre__icontains=query)
         )
-        # Ottieni tutte le playlist pubbliche degli altri utenti
         if  request.user.is_authenticated:
             other_public_playlists = Playlist.objects.exclude(user=current_user).filter(is_public=True)
-            # Ottieni tutte le playlist dell'utente corrente
             user_playlists = Playlist.objects.filter(user=current_user)
 
             playlists = other_public_playlists | user_playlists
@@ -334,7 +319,6 @@ def search(request):
             Q(genre__icontains=query)
         )
     elif filter_type == 'playlist':
-        # Ottieni tutte le playlist pubbliche degli altri utenti
         if  request.user.is_authenticated:
 
             playlists = Playlist.objects.exclude(user=current_user).filter(
@@ -342,7 +326,6 @@ def search(request):
                 Q(genre__icontains=query),
                 is_public=True
             )
-            # Aggiungi anche le playlist dell'utente corrente
             user_playlists = Playlist.objects.filter(
                 Q(name__icontains=query) |
                 Q(genre__icontains=query),
@@ -392,7 +375,6 @@ def recommendations(request):
     user_profile = UserProfile.objects.get(user=request.user)
     favorite_songs = user_profile.favorite_songs.all()
 
-    # Contare i generi più frequenti nelle canzoni preferite
     favorite_genres = favorite_songs.values_list('genre', flat=True)
     genre_counts = Counter(favorite_genres)
     top_genres = [genre for genre, _ in genre_counts.most_common(3)]
@@ -400,7 +382,6 @@ def recommendations(request):
     # Ottenere 10 canzoni suggerite basate sui generi preferiti
     recommended_songs = Song.objects.filter(genre__in=top_genres).exclude(id__in=favorite_songs).distinct()[:10]
 
-    # Ottenere tutte le playlist pubbliche
     public_playlists = Playlist.objects.filter(is_public=True).exclude(user=user)
     
     # Filtrare le playlist che corrispondono ai generi preferiti

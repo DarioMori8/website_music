@@ -2,7 +2,6 @@
 
 {% block content %}
 <div class="container mt-5">
-    <!-- Carosello Bootstrap -->
     <div id="playlistCarousel" class="carousel slide" data-bs-touch="true">
         <div class="carousel-inner">
             {% for group in playlist_groups %}
@@ -25,7 +24,7 @@
                 </div>
             {% endfor %}
         </div>
-        <!-- Aggiungi controlli manuali per il carosello -->
+        
         <button class="carousel-control-prev" type="button" data-bs-target="#playlistCarousel" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
@@ -39,7 +38,6 @@
 
 
 
-<!-- Titolo Top 15 songs -->
 <h2 class="text-center mt-5">Top 15 songs</h2>
 
 <!-- Lista delle 15 canzoni più ascoltate -->
@@ -49,7 +47,6 @@
             {% include 'songbird/partials/song_item.html' with song=song %}
         {% endfor %}
     </ul>
-    <!-- Pulsante per aprire la pagina dei consigli -->
     {% if request.user.is_authenticated %}
         <div class="text-center mt-4">
             <a href="{% url 'recommendations' %}" class="btn btn-success">Get Recommendations</a>
@@ -57,7 +54,6 @@
     {% endif %}
 </div>
 
-<!-- Modal to select playlist -->
 <div class="modal fade" id="addToPlaylistModal" tabindex="-1" role="dialog" aria-labelledby="addToPlaylistModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">

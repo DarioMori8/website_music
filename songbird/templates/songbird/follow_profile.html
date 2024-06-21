@@ -3,16 +3,13 @@
 
 {% block content %}
 <div class="container text-center">
-    <!-- Navbar -->
 
-    <!-- Username -->
     <div class="row align-items-center">
         <div class="col-12">
             <h1>{{ user_profile.user.username }}'s Profile</h1>
         </div>
     </div>
 
-    <!-- Profile picture -->
     <div class="row">
         <div class="col-12">
             {% if user_profile.profile_picture %}
@@ -23,7 +20,6 @@
         </div>
     </div>
 
-    <!-- Bio and email -->
     <div class="row">
         <div class="col-12">
             <p>Bio: {{ user_profile.bio }}</p>
@@ -77,7 +73,7 @@
                         </div>
                     {% endfor %}
                 </div>
-                <!-- Aggiungi controlli manuali per il carosello -->
+                
                 <button class="carousel-control-prev" type="button" data-bs-target="#playlistCarousel" data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Previous</span>

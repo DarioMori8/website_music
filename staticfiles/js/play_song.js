@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentAudio = null;
     let currentProgressBar = null;
     let currentTimeDisplay = null;
-    let audioData = {}; // Oggetto per memorizzare i dati audio di ogni traccia
+    let audioData = {};
 
     function updatePlayCount(songId, incrementUrl, csrfToken) {
         const now = Date.now();
@@ -94,7 +94,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const progressBar = document.querySelector(`#progress-bar-${songId}`);
             const currentTimeDisplayElement = document.querySelector(`#current-time-${songId}`);
     
-            // Ferma l'audio corrente e reimposta il progresso
             stopCurrentAudio();
     
             if (!audioData[audioUrl]) {
@@ -105,12 +104,12 @@ document.addEventListener('DOMContentLoaded', function () {
             currentProgressBar = progressBar;
             currentTimeDisplay = currentTimeDisplayElement;
     
-            // Se l'audio è già in riproduzione, reimposta il tempo corrente a 0 e riparti dall'inizio
+            // Se l'audio è già in riproduzione, reimposta il tempo corrente a 0 e riparte dall'inizio
             if (!currentAudio.paused) {
                 currentAudio.currentTime = 0;
             }
     
-            // Aggiungi un gestore per l'evento di errore
+            // Aggiunge un gestore per l'evento di errore
             currentAudio.addEventListener('error', function(event) {
                 console.error('Error playing audio:', event);
             });

@@ -23,23 +23,20 @@ $(document).ready(function() {
         userAuthenticated(function(authenticated) {
             if (authenticated) {
                 console.log('Handling login update - user is authenticated');  
-                loadUserPlaylists(); // Caricare le playlist dell'utente
+                loadUserPlaylists();
             } 
         });
     }
 
-    // Chiamare handleLoginUpdate all'avvio della pagina
     handleLoginUpdate();
 
-    // Listener per l'evento di login completato
     $(document).on('loginSuccess', function() {
-        console.log('Login success event triggered');  // Log dell'evento di login completato
+        console.log('Login success event triggered');  
         handleLoginUpdate();
     });
 
-    // Toggle favorite song
     $('.favorite-button').click(function() {
-        var button = $(this); // Salvare il riferimento al pulsante dei preferiti
+        var button = $(this); 
         var songId = button.data('song-id');
 
         userAuthenticated(function(authenticated) {
@@ -69,7 +66,6 @@ $(document).ready(function() {
         });
     });
 
-    // Check initial favorite status
     $('.favorite-button').each(function() {
         var button = $(this);
         var songId = button.data('song-id');
@@ -124,7 +120,6 @@ $(document).ready(function() {
         });
     }
 
-    // Function to add a song to the selected playlist
     function addToPlaylist(songId, playlistId) {
         $.ajax({
             url: `/add_to_playlist/${songId}/${playlistId}/`,
@@ -145,14 +140,13 @@ $(document).ready(function() {
         });
     }
 
-    // Handle click on add to playlist button
     $('.add-to-playlist-button').on('click', function(e) {
         var button = $(this);
         userAuthenticated(function(authenticated) {
             if (authenticated) {
                 var songId = button.data('song-id');
                 var dropdownMenu = button.next('.dropdown-menu');
-                dropdownMenu.data('song-id', songId);  // Store song ID in the dropdown menu
+                dropdownMenu.data('song-id', songId); 
                 $('.dropdown-menu').not(dropdownMenu).hide();
                 dropdownMenu.toggle();
                 e.stopPropagation();
@@ -162,14 +156,12 @@ $(document).ready(function() {
         });
     });
 
-    // Close dropdown when clicked outside
     $(document).on('click', function(e) {
         if (!$(e.target).closest('.add-to-playlist-button').length) {
             $('.dropdown-menu').hide();
         }
     });
 
-    // Handle click on a playlist item
     $('.dropdown-menu').on('click', '.dropdown-item', function(e) {
         e.preventDefault();
         var item = $(this);
@@ -180,7 +172,6 @@ $(document).ready(function() {
                 if (playlistId) {
                     addToPlaylist(songId, playlistId);
                 } else {
-                    // Handle creating a new playlist
                     alert('New Playlist feature not implemented yet');
                 }
             } else {
