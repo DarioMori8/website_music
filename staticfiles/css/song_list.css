@@ -1,0 +1,38 @@
+.song {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.song img {
+    width: 50px;
+    height: 50px;
+}
+
+.play-button {
+    transition: background-color 0.3s ease;
+}
+
+.play-button:hover {
+    background-color: #0056b3;
+}
+
+.song-progress {
+    width: 50%;
+    margin-top: 10px;
+}
+
+.progress-bar {
+    width: 100%;
+}
+
+.current-time {
+    display: block;
+    margin-top: 5px;
+    text-align: center;
+}
+
