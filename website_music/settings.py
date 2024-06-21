@@ -145,3 +145,6 @@ CACHES = {
 LOGIN_URL = '/accounts/login/'
 
 
+CSRF_TRUSTED_ORIGINS=[
+    'https://websitemusic-production.up.railway.app/'
+]
