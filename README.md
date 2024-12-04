@@ -1,100 +1,88 @@
-# Sito di Streaming Musicale Django
+# Django Music Streaming Site
 
-Benvenuto nel nostro sito di streaming musicale basato su Django! Questo README fornisce una panoramica delle funzionalità e delle caratteristiche del sito.
+Welcome to our Django-based music streaming site! This README provides an overview of the site's features and functionalities.
 
-## Indice
-- [Funzionalità](#funzionalità)
-- [Pagina Home](#pagina-home)
-- [Dettagli Playlist](#dettagli-playlist)
-- [Controlli delle Canzoni](#controlli-delle-canzoni)
-- [Canzoni Preferite](#canzoni-preferite)
-- [Aggiungere Canzoni alle Playlist](#aggiungere-canzoni-alle-playlist)
-- [Suggerimenti](#suggerimenti)
-- [Barra di Navigazione](#barra-di-navigazione)
-- [Pagina di Ricerca](#pagina-di-ricerca)
-- [Profilo Utente](#profilo-utente)
-- [Creazione di Playlist](#creazione-di-playlist)
-- [Installazione e Configurazione](#installazione-e-configurazione)
+## Table of Contents
+- [Features](#features)
+- [Home Page](#home-page)
+- [Playlist Details](#playlist-details)
+- [Song Controls](#song-controls)
+- [Favorite Songs](#favorite-songs)
+- [Adding Songs to Playlists](#adding-songs-to-playlists)
+- [Suggestions](#suggestions)
+- [Navigation Bar](#navigation-bar)
+- [Search Page](#search-page)
+- [User Profile](#user-profile)
+- [Creating Playlists](#creating-playlists)
+- [Installation and Setup](#installation-and-setup)
 
-## Funzionalità
-- Pagina home con un carosello di playlist.
-- Visualizzazione dettagliata delle playlist e delle loro canzoni.
-- Controlli per riprodurre, riavviare e fermare le canzoni.
-- Aggiungere o rimuovere canzoni dai preferiti.
-- Aggiungere canzoni a playlist specifiche dell'utente.
-- Suggerimenti di canzoni e playlist.
-- Funzionalità di ricerca completa.
-- Gestione del profilo utente.
-- Creazione e gestione di playlist utente.
+## Features
+- Home page with a playlist carousel.
+- Detailed view of playlists and their songs.
+- Controls to play, restart, and stop songs.
+- Add or remove songs from favorites.
+- Add songs to specific user playlists.
+- Song and playlist suggestions.
+- Full search functionality.
+- User profile management.
+- Creation and management of user playlists.
 
-## Pagina Home
-La pagina home include:
-- Un carosello di playlist. Cliccando su una playlist si aprono i dettagli.
-- Una lista di canzoni con controlli di riproduzione e stop. Facendo doppio clic su play, la canzone si riavvia.
-- Un'icona a forma di cuore per aggiungere/rimuovere canzoni dai preferiti.
-- Un'icona con il simbolo "+" per aggiungere canzoni alle tue playlist.
-- Un pulsante in fondo che apre una pagina con suggerimenti di canzoni e playlist.
-Le playlist mostrate sono solo quelle pubbliche e vengano selezionate solo le canzoni e le playlist più ascoltate dai vari utenti. 
+## Home Page
+The home page includes:
+- A playlist carousel. Clicking on a playlist opens its details.
+- A list of songs with play and stop controls. Double-clicking on play restarts the song.
+- A heart icon to add/remove songs from favorites.
+- A "+" icon to add songs to your playlists.
+- A button at the bottom that opens a page with song and playlist suggestions.
+The playlists displayed are only public ones, and only the most listened-to songs and playlists by various users are selected.
 
-## Dettagli Playlist
-Cliccando su una playlist nel carosello si apre una visualizzazione dettagliata con tutte le canzoni presenti nella playlist.
+## Playlist Details
+Clicking on a playlist in the carousel opens a detailed view showing all the songs in the playlist.
 
-## Controlli delle Canzoni
-- **Play**: Clicca una volta per riprodurre, doppio clic per riavviare.
-- **Stop**: Clicca per fermare la canzone.
-- **Preferiti**: Clicca sull'icona a forma di cuore per aggiungere una canzone ai preferiti. Clicca di nuovo per rimuoverla dai preferiti.
+## Song Controls
+- **Play**: Click once to play, double-click to restart.
+- **Stop**: Click to stop the song.
+- **Favorites**: Click on the heart icon to add a song to favorites. Click again to remove it.
 
-## Aggiungere Canzoni alle Playlist
-- Clicca sull'icona con il simbolo "+" accanto a una canzone.
-- Seleziona la playlist in cui vuoi aggiungere la canzone.
+## Adding Songs to Playlists
+- Click on the "+" icon next to a song.
+- Select the playlist you want to add the song to.
 
-## Suggerimenti
-- In fondo alla pagina home, il pulsante apre una pagina con suggerimenti.
-- I suggerimenti includono canzoni e playlist che potrebbero piacerti.
-- Le funzionalità all0interno della pagina sono simile a quella della pagina home.
+## Suggestions
+- At the bottom of the home page, the button opens a suggestions page.
+- Suggestions include songs and playlists you might like.
+- The functionality within the page is similar to the home page.
 
-## Barra di Navigazione
-- **Logo**: Cliccando sul logo si ritorna alla pagina home.
-- **Icona Profilo**: 
-  - Se non sei loggato, ti porta alla pagina di login/registrazione.
-  - Se sei loggato, apre la tua pagina del profilo.
-- **Icona di Ricerca**: Apre la pagina di ricerca.
+## Navigation Bar
+- **Logo**: Clicking the logo takes you back to the home page.
+- **Profile Icon**: 
+  - If you are not logged in, it redirects to the login/registration page.
+  - If you are logged in, it opens your profile page.
+- **Search Icon**: Opens the search page.
 
-## Pagina di Ricerca
-- Cerca tra utenti, canzoni, playlist, artisti o generi.
-- Cliccando sui risultati di ricerca si aprono le pagine corrispondenti:
-  - **Utente**: Apre il profilo utente con il pulsante segui/non segui e le sue playlist pubbliche.
-  - **Artista**: Apre una pagina con le canzoni dell'artista.
-  - **Genere**: Apre una pagina con canzoni e playlist di quel genere.
-  - **Playlist**: Apre la visualizzazione dettagliata della playlist.
-- I filtri possono essere attivati cliccando sui pulsanti sotto la barra di ricerca.
+## Search Page
+- Search among users, songs, playlists, artists, or genres.
+- Clicking on search results opens the corresponding pages:
+  - **User**: Opens the user profile with the follow/unfollow button and their public playlists.
+  - **Artist**: Opens a page with the artist's songs.
+  - **Genre**: Opens a page with songs and playlists of that genre.
+  - **Playlist**: Opens the detailed view of the playlist.
+- Filters can be activated by clicking the buttons below the search bar.
 
-## Profilo Utente
-- **Pulsante Modifica (in basso a destra)**: Ti permette di modificare bio, username, immagine, ecc.
-- **Pulsanti a Sinistra**:
-  - **Preferiti**: Lista delle tue canzoni preferite.
-  - **Seguiti**: Lista degli utenti che segui.
-  - **Playlist**: Lista delle tue playlist. Clicca per visualizzare i dettagli e per eventaulmente aggiungere nuove playlist.
+## User Profile
+- **Edit Button (bottom right)**: Allows you to edit bio, username, profile picture, etc.
+- **Left Buttons**:
+  - **Favorites**: List of your favorite songs.
+  - **Following**: List of users you follow.
+  - **Playlists**: List of your playlists. Click to view details or add new playlists.
 
-## Creazione di Playlist
-- Naviga al tuo profilo e clicca sul pulsante presnte nella lista delle tua playlist per creare una nuova playlist.
-- Inserisci il nome della playlist.
-- Facoltativamente, aggiungi canzoni e per impostare la playlist come pubblica si deve spuntare o meno l'ultima voce presente; Se spuntata allora è pubblica.
-- Salva la nuova playlist.
+## Creating Playlists
+- Navigate to your profile and click the button in your playlist list to create a new playlist.
+- Enter the playlist name.
+- Optionally, add songs and check the last box to set the playlist as public. If checked, the playlist will be public.
+- Save the new playlist.
 
-## Installazione e Configurazione
-1. Clona il repository:
+## Installation and Setup
+1. Clone the repository:
    ```bash
    git clone <repository-url>
-2. Installa le dipendenze:
-    ```bash
-    pip install -r requirements.txt
-3. Esegui le migrazioni:
-    ```bash
-    python manage.py migrate
-4. Crea un superuser:
-    ```bash
-    python manage.py createsuperuser
-5. Avvia il server di sviluppo:
-    ```bash
-    python manage.py runserver
