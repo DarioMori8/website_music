@@ -84,21 +84,18 @@ Clicking on a playlist in the carousel opens a detailed view showing all the son
 
 ## Installation and Setup
 1. Clone the repository:
-   
-bash
+   ```bash
    git clone <repository-url>
 2. Install dependencies:
-bash
-    pip install -r requirements.txt
-3. Run migrations:
-    
-bash
+   ```bash
+   pip install -r requirements.txt
+3. Run migrations:    
+    ```bash
     python manage.py migrate
 4. Create a superuser:
-bash
+    ```bash
     python manage.py createsuperuser
 5. Start the development server:
-    
-bash
+    ```bash
     python manage.py runserver
 
